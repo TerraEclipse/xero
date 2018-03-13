@@ -20,7 +20,7 @@ function Xero(key, secret, rsa_key, showXmlAttributes, customHeaders) {
     }
 }
 
-Xero.prototype.call = function(method, path, body, callback) {
+Xero.prototype.call = function(method, path, body, callback, proxy) {
     var self = this;
 
     var post_body = null;
@@ -48,7 +48,7 @@ Xero.prototype.call = function(method, path, body, callback) {
             }
         });
     };
-    return self.oa._performSecureRequest(self.key, self.secret, method, XERO_API_URL + path, null, post_body, content_type, callback ? process : null);
+    return self.oa._performSecureRequest(self.key, self.secret, method, proxy || '' + XERO_API_URL + path, null, post_body, content_type, callback ? process : null);
 }
 
 module.exports = Xero;
